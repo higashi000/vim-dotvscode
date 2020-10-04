@@ -7,7 +7,7 @@ function dotvscode#searchDotVSC() abort
         let l:tmpCurrentDir = execute(':pwd')
 
         if l:tmpCurrentDir == "\n/"
-            echo 'not exists .vscode in root directory'
+            let l:tmpCurrentDir = ''
             break
         endif
 
@@ -21,4 +21,6 @@ function dotvscode#searchDotVSC() abort
     endwhile
 
     call execute(':cd '.strpart(l:currentDir, 1))
+
+    return l:tmpCurrentDir
 endfunction
