@@ -22,5 +22,24 @@ function dotvscode#searchDotVSC() abort
 
     call execute(':cd '.strpart(l:currentDir, 1))
 
-    return l:tmpCurrentDir
+    return strpart(l:tmpCurrentDir, 1)
+endfunction
+
+function dotvscode#loadSettingsJSON() abort
+    let l:filepath = dotvscode#searchDotVSC()
+
+    let s:V = vital#dotvscode#new()
+    let s:J = s:V.import('Web.JSON')
+
+    let l:settingjson = ''
+
+    if l:filepath != ''
+    for line in readfile(l:filepath . '/.vscode/settings.json')
+        let l:settingjson = l:settingjson . line
+    endfor
+    else
+        echo 'failed search .vscode'
+    endif
+
+    echo l:settingjson
 endfunction
