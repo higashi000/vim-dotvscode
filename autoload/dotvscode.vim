@@ -1,3 +1,6 @@
+let s:save_cpo = &cpo
+set cpo&vim
+
 function dotvscode#searchDotVSC() abort
     let l:currentDir = execute(':pwd')
     call finddir('.vscode', l:currentDir)
@@ -43,3 +46,6 @@ function dotvscode#loadSettingsJSON() abort
 
     echo l:settingjson
 endfunction
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
