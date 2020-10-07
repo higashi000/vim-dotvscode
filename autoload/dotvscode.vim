@@ -42,9 +42,12 @@ function dotvscode#loadSettingsJSON() abort
     endfor
     else
         echo 'failed search .vscode'
+        return
     endif
 
-    echo l:settingjson
+    let l:parseJSON = s:J.decode(l:settingjson)
+
+    return l:parseJSON
 endfunction
 
 let &cpo = s:save_cpo
