@@ -50,5 +50,21 @@ function dotvscode#loadSettingsJSON() abort
     return l:parseJSON
 endfunction
 
+function dotvscode#setVSCodeSettings() abort
+    let l:settingsJSON = dotvscode#loadSettingsJSON()
+
+    if has_key(l:settingsJSON, 'editor.insertSpaces') && l:settingsJSON['editor.insertSpaces'] == v:true
+        set expandtab
+    elseif has_key(l:settingsJSON, 'editor.insertSpaces') && l:settingsJSON['editor.insertSpaces'] == v:false
+        set noexpandtab
+    endif
+
+    if has_key(l:settingsJSON, 'editor.insertSpaces')
+        set shiftwidth=l:settingsJSON['editor.tabSize']
+    else
+        set shiftwidth=4
+    endif
+endfunction
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
