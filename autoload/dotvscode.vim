@@ -47,11 +47,16 @@ function dotvscode#loadSettingsJSON() abort
 
     let l:parseJSON = s:J.decode(l:settingjson)
 
+    let g:dotvscode#existsSettingsJSON = v:true
     return l:parseJSON
 endfunction
 
 function dotvscode#setVSCodeSettings() abort
     let l:settingsJSON = dotvscode#loadSettingsJSON()
+
+    if g:dotvscode#existsSettingsJSON == v:false
+        return
+    endif
 
     if has_key(l:settingsJSON, 'editor.insertSpaces') && l:settingsJSON['editor.insertSpaces'] == v:true
         set expandtab
