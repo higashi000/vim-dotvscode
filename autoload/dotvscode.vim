@@ -64,8 +64,8 @@ function dotvscode#setVSCodeSettings() abort
         set noexpandtab
     endif
 
-    if has_key(l:settingsJSON, 'editor.insertSpaces')
-        set shiftwidth=l:settingsJSON['editor.tabSize']
+    if has_key(l:settingsJSON, 'editor.tabSize')
+        let &shiftwidth = l:settingsJSON['editor.tabSize']
     else
         set shiftwidth=4
     endif
